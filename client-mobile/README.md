@@ -4,14 +4,17 @@ This project sets out to allow developing a mobile project without having to ins
 Dependencies and environment is dockerized and allows running the application on a connected phone from the container.
 
 ## run
+
 ```
 docker-compose run --rm client-mobile
 ```
+
 this will run an interactive shell in `/build` directory where you can interact with flutter etc
 
 first-time setup on the container
 
 to install packages and then run the application
+
 ```
 flutter pub get
 flutter run
@@ -20,10 +23,13 @@ flutter run
 ## troubleshooting
 
 check if everything is working correctly:
+
 ```
 flutter doctor
 ```
+
 ideally the output will be something like this:
+
 ```
 root@80e81def1c64:/build# flutter doctor
 Doctor summary (to see all details, run flutter doctor -v):
@@ -36,11 +42,27 @@ Doctor summary (to see all details, run flutter doctor -v):
 ```
 
 if the device is not connected, try restarting adb
+
 ```
 adb start-server
 ```
 
----
+## Windows loosers
+
+The only way is to install `platform-tools` and use network connection for development purposes. To achieve that, connect your Android device and then
+
+```
+adb devices
+adb tcpip 5555
+```
+
+There should be your device listed. Check it's IP in System tab in settings then:
+
+```
+adb connect 192.and.roi.dip:5555
+```
+
+it's connected, so should work. Run the same connect command in flutter docker image.
 
 # build
 
